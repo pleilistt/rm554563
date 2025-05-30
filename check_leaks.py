@@ -1,5 +1,7 @@
 import hashlib
 import requests
+import argparse
+
 import sys
 import re
 
@@ -77,12 +79,14 @@ def check_mozilla(email):
         return False
 
 def main():
-    if len(sys.argv) != 3:
-        print("Uso: python check_leaks.py <email> <senha>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Verifica vazamentos de e-mail e senha.")
+    parser.add_argument('--email', required=True, help='Email para verificar')
+    parser.add_argument('--password', required=True, help='Senha para verificar')
+    args = parser.parse_args()
 
-    email = sys.argv[1]
-    password = sys.argv[2]
+    email = args.email
+    password = args.password
+
 
     print(f"Verificando credenciais: {email} / {password}")
     print("== Iniciando verificação ==")
