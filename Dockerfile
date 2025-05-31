@@ -1,8 +1,10 @@
 FROM python:3.11-slim
 
 WORKDIR /app
-COPY . .
 
-RUN pip install requests
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "check_leaks.py"]
+COPY check_leaks.py .
+
+ENTRYPOINT ["python", "check_leaks.py"]
